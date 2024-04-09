@@ -17,12 +17,15 @@ d. Tried to integrate the same interraform
 
 ### Second media wiki integrated
 <img width="1403" alt="Screenshot 2024-03-12 at 10 16 09 PM" src="https://github.com/priyaprabhakar07/mediawiki/assets/103212725/54d56dec-448f-48a2-9574-6527c9963b51">
+Successfully loaded the page for database entries
 
-### ERROR
-On checking, I could see some loop with $file requirement in PHP file in the media wiki index page
+Once it is entered, It asked to download the LocalSettings.php 
 
-### Solution: 
-May need to try with php image and try building apache and mediawiki on top of that image
+Downloaded and copied the file to php-apache container
+```
+priya ~/Downloads  $ docker cp LocalSettings.php php-apache-mediawiki-ver3:/var/www/html/mediawiki-1.41.0
+```
+Once copied, click on "Enter your wiki" Your wikipage will be loaded
 
 ### Commands used
 ```
@@ -32,8 +35,7 @@ docker build -t php-apache-mediawiki . --file ./Dockerfile
 docker run \
   -it --rm \
   -p 8080:80 -p 443:443 \
-  --name php-apache-mediawiki --network mediawiki-net \
-  -v "$PWD":/var/www/html \
+  --name php-apache-mediawiki-ver3 --network mediawiki-net \
   -d php-apache-mediawiki
 
 ```
@@ -58,6 +60,20 @@ mysql Docker was up and able to connect and see the database and user
 <img width="634" alt="Screenshot 2024-03-12 at 10 44 50 PM" src="https://github.com/priyaprabhakar07/mediawiki/assets/103212725/b76a957d-d4f4-4266-b91f-612fd4c23f06">
 
 and both the Application and MySQL containers are in the same bridge to communicate
+commands used
+
+```
+docker network create --driver bridge mediawiki-net
+```
+
+```
+priya ~/project/mediawiki-docker  $ docker network ls | grep mediawi
+cf1a2a9dd40e   mediawiki-net                    bridge    local
+priya ~/project/mediawiki-docker  $
+```
+```
+docker network inspect mediawiki-net
+```
 
 <img width="726" alt="Screenshot 2024-03-12 at 11 16 52 PM" src="https://github.com/priyaprabhakar07/mediawiki/assets/103212725/6e2cbf4c-1478-4784-9f69-4aa5154578b1">
 
@@ -351,11 +367,18 @@ b. Tagging needs to be done
 
 c. dependency can be created for network before crreating the docker container
 
+d. This setup is not scalable. Below are the options to scale the above approach
+
+1. Use ECS
+2. Docker Swarm
+3. Use ansible and ASG together
+4. Kubernetes
+
 ## PENDING
-a. Fix mediawiki code issue with application standalone docker setup
+<s> a. Fix mediawiki code issue with application standalone docker setup </s> - fixed
 
 b. Integrating mediawiki with application container in terraform setup
 
-c. Communication testing between the containers and others arre not carried out
+<s> c. Communication testing between the containers and others arre not carried out </s> - Done
 
 d. All can be autmated with github actions so that for any change in code a full cycle of testing and notifications can be done
