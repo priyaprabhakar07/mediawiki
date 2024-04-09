@@ -16,16 +16,17 @@ d. Tried to integrate the same interraform
 <img width="482" alt="Screenshot 2024-03-12 at 10 17 08 PM" src="https://github.com/priyaprabhakar07/mediawiki/assets/103212725/58d2c545-0aee-4d13-9b1e-0fe9ce7915f1">
 
 ### Second media wiki integrated
-<img width="1403" alt="Screenshot 2024-03-12 at 10 16 09 PM" src="https://github.com/priyaprabhakar07/mediawiki/assets/103212725/54d56dec-448f-48a2-9574-6527c9963b51">
+<img width="1411" alt="Screenshot 2024-04-09 at 9 51 21 PM" src="https://github.com/priyaprabhakar07/mediawiki/assets/103212725/d69a2425-b422-4159-b7a0-97165d3ca898">
+
 Successfully loaded the page for database entries
 
-Once it is entered, It asked to download the LocalSettings.php 
+Once it is entered, it asked to download the LocalSettings.php 
 
 Downloaded and copied the file to php-apache container
 ```
 priya ~/Downloads  $ docker cp LocalSettings.php php-apache-mediawiki-ver3:/var/www/html/mediawiki-1.41.0
 ```
-Once copied, click on "Enter your wiki" Your wikipage will be loaded
+Once copied, click on "Enter your wiki" Your wikipage will be loaded. Hurray!!!
 
 ### Commands used
 ```
